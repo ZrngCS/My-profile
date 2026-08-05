@@ -2,7 +2,13 @@
 <html lang="en">
 
 <head>
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="apple-mobile-web-app-title" content="ZRNG Portfolio">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,7 +32,9 @@
 
     <link rel="manifest" href="manifest.json">
 
-    <link rel="icon" href="assets/icons/icon-192.png">
+    <link rel="icon" href="./assets/icons/icon-192.png">
+    <link rel="icon" href="./assets/icons/icon-512.png">
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -40,7 +48,23 @@
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6C63FF">
+    <meta property="og:url" content="https://YOUR_USERNAME.github.io/Portfolio/">
 
+    <meta property="og:site_name" content="ZRNG Portfolio">
+
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="ZRNG Portfolio">
+
+    <meta name="twitter:description" content="Modern Personal Portfolio">
+
+    <meta name="twitter:image" content="assets/images/profile.jpg">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="mobile-web-app-capable" content="yes">
 </head>
 
 <body>
@@ -101,11 +125,24 @@
 
         </button>
 
+        <button id="menuBtn">
+
+    <i class="fa-solid fa-bars"></i>
+
+</button>
+
     </nav>
 
     <!-- Hero -->
 
     <section id="home" class="hero">
+        <button id="installBtn" class="install-btn">
+
+    <i class="fa-solid fa-download"></i>
+
+    Install App
+
+</button>
 
         <div class="hero-left">
 
@@ -155,7 +192,7 @@
 
             <div class="profile-card">
 
-                <img src="assets/images/profile.jpg" alt="Profile">
+                <img src="./assets/images/profile.jpg" alt="Profile" loading="lazy" decoding="async">
 
                 <h2>
 
@@ -171,13 +208,13 @@
 
                 <div class="socials">
 
-                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/share/18z4L8A9uP/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
 
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/zrng_s_ghafur?igsh=bmRob2YzczVwd3g2&utm_source=qr"><i class="fab fa-instagram"></i></a>
 
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="https://snapchat.com/t/1IvLCgIm"><i class="fab fa-snapchat"></i></a>
 
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.tiktok.com/@t0xic.005?_r=1&_t=ZS-98YH3KWNxXU"><i class="fab fa-tiktok"></i></a>
 
                 </div>
 
@@ -206,7 +243,7 @@
 
             <div class="about-image">
 
-                <img src="assets/images/profile.jpg" alt="Profile">
+                <img src="./assets/images/profile.jpg" alt="Profile" loading="lazy" decoding="async">
 
             </div>
 
@@ -244,7 +281,7 @@
 
                         <strong>Email</strong>
 
-                        <span>zrng@example.com</span>
+                        <span>zrngsarkan@gmail.com</span>
 
                     </div>
 
@@ -442,119 +479,8 @@
 
         </div>
 
-    </section>
 
-    <!-- =========================
-     PROJECTS
-========================= -->
 
-    <section id="projects" class="section">
-
-        <div class="section-title">
-
-            <span>PORTFOLIO</span>
-
-            <h2>Featured Projects</h2>
-
-        </div>
-
-        <div class="projects-grid">
-
-            <article class="project-card">
-
-                <img src="assets/images/project1.jpg" alt="Quiz App">
-
-                <div class="project-content">
-
-                    <h3>Quiz Game</h3>
-
-                    <p>
-
-                        Modern Quiz Application with Timer, Levels, PWA and Leaderboard.
-
-                    </p>
-
-                    <div class="project-tags">
-
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-
-                    </div>
-
-                    <a href="#" class="project-btn">
-
-                    Live Demo
-
-                </a>
-
-                </div>
-
-            </article>
-
-            <article class="project-card">
-
-                <img src="assets/images/project2.jpg" alt="Portfolio">
-
-                <div class="project-content">
-
-                    <h3>Portfolio Website</h3>
-
-                    <p>
-
-                        Responsive Personal Portfolio with Glassmorphism UI.
-
-                    </p>
-
-                    <div class="project-tags">
-
-                        <span>Portfolio</span>
-                        <span>Responsive</span>
-
-                    </div>
-
-                    <a href="#" class="project-btn">
-
-                    View Project
-
-                </a>
-
-                </div>
-
-            </article>
-
-            <article class="project-card">
-
-                <img src="assets/images/project3.jpg" alt="Dashboard">
-
-                <div class="project-content">
-
-                    <h3>Dashboard UI</h3>
-
-                    <p>
-
-                        Modern Admin Dashboard Design.
-
-                    </p>
-
-                    <div class="project-tags">
-
-                        <span>UI</span>
-                        <span>Design</span>
-
-                    </div>
-
-                    <a href="#" class="project-btn">
-
-                    Preview
-
-                </a>
-
-                </div>
-
-            </article>
-
-        </div>
 
     </section>
 
@@ -624,14 +550,13 @@
 
         <form class="contact-form">
 
-            <input type="text" placeholder="Full Name" required>
+            <input type="text" name="name" placeholder="Full Name" required>
 
-            <input type="email" placeholder="Email Address" required>
+            <input type="email" name="email" placeholder="Email Address" required>
 
-            <input type="text" placeholder="Subject">
+            <input type="text" name="subject" placeholder="Subject" required>
 
-            <textarea rows="7" placeholder="Write your message..." required></textarea>
-
+            <textarea name="message" rows="7" placeholder="Write your message..." required></textarea>
             <button type="submit">
 
             Send Message
@@ -686,6 +611,11 @@
 
     <script src="script.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+        emailjs.init("oahpqHXGi-vGZ-hsq");
+    </script>
 </body>
 
 </html>

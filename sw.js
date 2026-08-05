@@ -1,74 +1,92 @@
-const CACHE_NAME = "zrng-v1";
+const CACHE_NAME = "zrng-portfolio-v2";
 
-const FILES = [
-
-    "/",
-
-    "/index.html",
-
-    "/style.css",
-
-    "/script.js",
-
-    "/manifest.json"
-
+// فایلە سەرەکییەکان
+const STATIC_FILES = [
+    "./",
+    "./index.html",
+    "./style.css",
+    "./script.js",
+    "./manifest.json",
+    "./offline.html"
 ];
 
-self.addEventListener("install", event => {
+// دامەزراندن
+self.addEventListener("install", (event) => {
+    self.skipWaiting();
 
     event.waitUntil(
-
-        caches.open(CACHE_NAME)
-
-        .then(cache => {
-
-            return cache.addAll(FILES);
-
+        caches.open(CACHE_NAME).then(async(cache) => {
+            for (const file of STATIC_FILES) {
+                try {
+                    await cache.add(file);
+                    console.log("Cached:", file);
+                } catch (err) {
+                    console.warn("Could not cache:", file, err);
+                }
+            }
         })
-
     );
-
 });
 
-self.addEventListener("activate", event => {
-
+// چالاککردن
+self.addEventListener("activate", (event) => {
     event.waitUntil(
-
-        caches.keys()
-
-        .then(keys => {
-
-            return Promise.all(
-
-                keys.map(key => {
-
+        caches.keys().then((keys) =>
+            Promise.all(
+                keys.map((key) => {
                     if (key !== CACHE_NAME) {
-
                         return caches.delete(key);
-
                     }
-
                 })
-
-            );
-
-        })
-
+            )
+        ).then(() => self.clients.claim())
     );
-
 });
 
-self.addEventListener("fetch", event => {
+// داواکارییەکان
+self.addEventListener("fetch", (event) => {
+
+    // تەنها GET Cache بکە
+    if (event.request.method !== "GET") return;
 
     event.respondWith(
 
-        caches.match(event.request)
+        caches.match(event.request).then((cached) => {
 
-        .then(response => {
+            // ئەگەر لە Cache هەبوو
+            if (cached) {
+                return cached;
+            }
 
-            return response ||
+            // ئەگەر نەبوو لە Network بیهێنە
+            return fetch(event.request)
+                .then((response) => {
 
-                fetch(event.request);
+                    // ئەگەر وەڵامەکە دروست نەبوو Cache مەکە
+                    if (!response || response.status !== 200) {
+                        return response;
+                    }
+
+                    // تەنها http/https Cache بکە
+                    if (event.request.url.startsWith("http")) {
+                        const clone = response.clone();
+
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, clone);
+                        });
+                    }
+
+                    return response;
+
+                })
+                .catch(() => {
+
+                    // ئەگەر پەڕەیەک بوو و ئینتەرنێت نەبوو
+                    if (event.request.mode === "navigate") {
+                        return caches.match("./offline.html");
+                    }
+
+                });
 
         })
 

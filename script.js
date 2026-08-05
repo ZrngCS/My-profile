@@ -22,7 +22,6 @@ window.addEventListener("load", () => {
     }, 700);
 
 });
-
 // ===============================
 // Dynamic Year
 // ===============================
@@ -364,20 +363,35 @@ topBtn.onclick = () => {
 
 const form = document.querySelector(".contact-form");
 
-if (form) {
+form.addEventListener("submit", function(e) {
 
-    form.addEventListener("submit", e => {
+    e.preventDefault();
 
-        e.preventDefault();
+    emailjs.sendForm(
 
-        alert("Thank you! Your message has been received.");
+        "service_7h2i5ws",
+
+        "template_iuxclj6",
+
+        this
+
+    )
+
+    .then(() => {
+
+        alert("✅ Message Sent Successfully");
 
         form.reset();
 
+    })
+
+    .catch(() => {
+
+        alert("❌ Failed");
+
     });
 
-}
-
+});
 /* ======================================
    SERVICE WORKER
 ====================================== */
@@ -403,3 +417,109 @@ if ("serviceWorker" in navigator) {
     });
 
 }
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+
+const menu = document.querySelector("nav ul");
+
+if (menuBtn && menu) {
+
+    menuBtn.onclick = () => {
+
+        menu.classList.toggle("active");
+
+    };
+
+    document.querySelectorAll("nav ul a")
+
+    .forEach(link => {
+
+        link.onclick = () => {
+
+            menu.classList.remove("active");
+
+        };
+
+    });
+
+}
+/* =========================
+   INSTALL APP
+========================= */
+
+let deferredPrompt;
+
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+    e.preventDefault();
+
+    deferredPrompt = e;
+
+    installBtn.classList.add("show");
+
+});
+
+installBtn.addEventListener("click", async() => {
+
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const result = await deferredPrompt.userChoice;
+
+    if (result.outcome === "accepted") {
+
+        console.log("PWA Installed");
+
+    }
+
+    installBtn.classList.remove("show");
+
+    deferredPrompt = null;
+
+});
+window.addEventListener("appinstalled", () => {
+
+    console.log("Application Installed");
+
+    installBtn.style.display = "none";
+
+});
+
+// =========================
+// AUTO UPDATE
+// =========================
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.addEventListener(
+
+        "controllerchange",
+
+        () => {
+
+            window.location.reload();
+
+        }
+
+    );
+
+}
+console.log(
+
+    "%cZRNG PORTFOLIO",
+
+    "color:#6C63FF;font-size:28px;font-weight:bold;"
+
+);
+
+console.log(
+
+    "Created by Zrng Sarkan Ghafur"
+
+);
