@@ -1,23 +1,27 @@
 {
-    "name": "Zrng Sarkan Ghafur | Links",
-    "short_name": "Zrng Links",
-    "description": "Links to Zrng Sarkan Ghafur's website and social profiles.",
-    "start_url": "/",
+    "name": "Zrng Sarkan Portfolio",
+    "short_name": "ZRNG",
+    "description": "Modern Portfolio Website",
+    "start_url": "./",
     "display": "standalone",
-    "background_color": "#050505",
-    "theme_color": "#050505",
     "orientation": "portrait",
-    "icons": [{
-            "src": "https://cdn.corenexis.com/f/vTBBXkXgvUA.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
+    "background_color": "#050816",
+    "theme_color": "#6C63FF",
+
+    "icons": [
+
         {
-            "src": "https://cdn.corenexis.com/f/vTBBXkXgvUA.png",
+            "src": "assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+
+        {
+            "src": "assets/icons/icon-512.png",
             "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
+            "type": "image/png"
         }
+
     ]
+
 }
