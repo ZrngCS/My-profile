@@ -1,0 +1,23 @@
+{
+    "name": "Zrng Sarkan Ghafur | Links",
+    "short_name": "Zrng Links",
+    "description": "Links to Zrng Sarkan Ghafur's website and social profiles.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050505",
+    "theme_color": "#050505",
+    "orientation": "portrait",
+    "icons": [{
+            "src": "https://cdn.corenexis.com/f/vTBBXkXgvUA.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://cdn.corenexis.com/f/vTBBXkXgvUA.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
