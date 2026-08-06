@@ -1,11 +1,11 @@
-const CACHE_NAME = "zrng-portfolio-v2";
+const CACHE_NAME = "zrng-portfolio-v5";
 
 // فایلە سەرەکییەکان
 const STATIC_FILES = [
     "./",
     "./index.html",
-    "./style.css",
-    "./script.js",
+    "./style.css?v=5",
+    "./script.js?v=5",
     "./manifest.json",
     "./offline.html"
 ];
@@ -48,6 +48,42 @@ self.addEventListener("fetch", (event) => {
 
     // تەنها GET Cache بکە
     if (event.request.method !== "GET") return;
+
+    const requestUrl = new URL(event.request.url);
+
+    const isAppShellRequest =
+        requestUrl.origin === self.location.origin &&
+        (
+            event.request.mode === "navigate" ||
+            requestUrl.pathname.endsWith("/index.html") ||
+            requestUrl.pathname.endsWith("/style.css") ||
+            requestUrl.pathname.endsWith("/script.js")
+        );
+
+    // Fetch the app shell from the network first so updates are not held back by a stale cache.
+    if (isAppShellRequest) {
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    if (response && response.status === 200) {
+                        const clone = response.clone();
+
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, clone);
+                        });
+                    }
+
+                    return response;
+                })
+                .catch(() =>
+                    caches.match(event.request).then((cached) =>
+                        cached || caches.match("./offline.html")
+                    )
+                )
+        );
+
+        return;
+    }
 
     event.respondWith(
 

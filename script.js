@@ -28,6 +28,12 @@ window.addEventListener("load", () => {
 
 const year = document.getElementById("year");
 
+const useLowMotion = window.matchMedia(
+
+    "(max-width: 768px), (prefers-reduced-motion: reduce)"
+
+).matches;
+
 if (year) {
 
     year.textContent = new Date().getFullYear();
@@ -97,7 +103,7 @@ document.querySelectorAll('a[href^="#"]')
 
             target.scrollIntoView({
 
-                behavior: "smooth"
+                behavior: useLowMotion ? "auto" : "smooth"
 
             });
 
@@ -119,15 +125,39 @@ const navLinks =
 
     document.querySelectorAll("nav ul li a");
 
-window.addEventListener("scroll", () => {
+const scrollTasks = [];
+
+let scrollTicking = false;
+
+const runScrollTasks = () => {
+
+    if (scrollTicking) return;
+
+    scrollTicking = true;
+
+    requestAnimationFrame(() => {
+
+        scrollTasks.forEach(task => task());
+
+        scrollTicking = false;
+
+    });
+
+};
+
+window.addEventListener("scroll", runScrollTasks, {
+
+    passive: true
+
+});
+
+const updateActiveNavigation = () => {
 
     let current = "";
 
     sections.forEach(section => {
 
         const top = section.offsetTop - 180;
-
-        const height = section.offsetHeight;
 
         if (scrollY >= top) {
 
@@ -155,7 +185,9 @@ window.addEventListener("scroll", () => {
 
     });
 
-});
+};
+
+scrollTasks.push(updateActiveNavigation);
 
 // ===============================
 // Scroll Reveal
@@ -187,9 +219,7 @@ const reveal = () => {
 
 };
 
-window.addEventListener("scroll", reveal);
-
-reveal();
+scrollTasks.push(reveal);
 /* ======================================
    COUNTER ANIMATION
 ====================================== */
@@ -236,7 +266,7 @@ const startCounters = () => {
 
 let counterStarted = false;
 
-window.addEventListener("scroll", () => {
+const startCountersWhenVisible = () => {
 
     const stats = document.querySelector(".stats");
 
@@ -252,7 +282,9 @@ window.addEventListener("scroll", () => {
 
     }
 
-});
+};
+
+scrollTasks.push(startCountersWhenVisible);
 
 /* ======================================
    TYPING EFFECT
@@ -315,7 +347,15 @@ function typingEffect() {
 
 }
 
-typingEffect();
+if (useLowMotion) {
+
+    if (typingTarget) typingTarget.textContent = words[0];
+
+} else {
+
+    typingEffect();
+
+}
 
 /* ======================================
    BACK TO TOP
@@ -331,7 +371,7 @@ topBtn.innerHTML =
 
 document.body.appendChild(topBtn);
 
-window.addEventListener("scroll", () => {
+const updateTopButton = () => {
 
     if (window.scrollY > 500) {
 
@@ -343,7 +383,11 @@ window.addEventListener("scroll", () => {
 
     }
 
-});
+};
+
+scrollTasks.push(updateTopButton);
+
+runScrollTasks();
 
 topBtn.onclick = () => {
 
@@ -351,7 +395,7 @@ topBtn.onclick = () => {
 
         top: 0,
 
-        behavior: "smooth"
+        behavior: useLowMotion ? "auto" : "smooth"
 
     });
 

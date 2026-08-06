@@ -1355,3 +1355,69 @@ body.light {
     opacity: 1;
     transform: none;
 }
+
+/* ==========================================
+   MOBILE PERFORMANCE
+========================================== */
+
+@media(max-width:768px) {
+    html {
+        scroll-behavior: auto;
+    }
+    .background span {
+        animation: none;
+        filter: blur(45px);
+        opacity: .15;
+    }
+    .background span:nth-child(4),
+    .background span:nth-child(5) {
+        display: none;
+    }
+    nav {
+        background: rgba(8, 13, 31, .92);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+    .profile-card,
+    .skill-card,
+    .timeline-item,
+    .project-card,
+    .contact-form input,
+    .contact-form textarea,
+    .project-status,
+    .project-modal-backdrop {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+    .project-showcase::before {
+        filter: blur(55px);
+    }
+    .project-showcase:hover .project-visual img {
+        transform: none;
+    }
+    .section,
+    .skill-card,
+    .project-card,
+    .certificate-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    body.light nav {
+        background: rgba(255, 255, 255, .94);
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
