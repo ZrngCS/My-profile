@@ -392,6 +392,44 @@ form.addEventListener("submit", function(e) {
     });
 
 });
+
+// ===============================
+// Project Details Dialog
+// ===============================
+
+const projectModal = document.getElementById("projectModal");
+const projectTrigger = document.querySelector("[data-project-trigger]");
+const projectCloseButtons = document.querySelectorAll("[data-project-close]");
+let lastFocusedElement;
+
+const closeProjectModal = () => {
+    if (!projectModal) return;
+
+    projectModal.classList.remove("is-open");
+    projectModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    lastFocusedElement?.focus();
+};
+
+if (projectModal && projectTrigger) {
+    projectTrigger.addEventListener("click", () => {
+        lastFocusedElement = document.activeElement;
+        projectModal.classList.add("is-open");
+        projectModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        projectModal.querySelector(".project-modal-close").focus();
+    });
+
+    projectCloseButtons.forEach(button => {
+        button.addEventListener("click", closeProjectModal);
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && projectModal.classList.contains("is-open")) {
+            closeProjectModal();
+        }
+    });
+}
 /* ======================================
    SERVICE WORKER
 ====================================== */
