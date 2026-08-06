@@ -1356,6 +1356,7 @@ body.light {
     transform: none;
 }
 
+
 /* ==========================================
    MOBILE PERFORMANCE
 ========================================== */
@@ -1419,5 +1420,88 @@ body.light {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+    }
+}
+
+/* ==========================================
+   RTL (KURDISH) SUPPORT
+========================================== */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] nav ul {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-left, 
+[dir="rtl"] .about-content {
+    text-align: right;
+}
+
+[dir="rtl"] .hero-buttons {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+[dir="rtl"] .project-actions i,
+[dir="rtl"] .hero-buttons i,
+[dir="rtl"] .modal-cta i,
+[dir="rtl"] .project-contact-link i {
+    transform: scaleX(-1);
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+[dir="rtl"] .project-btn:hover i,
+[dir="rtl"] .project-contact-link:hover i,
+[dir="rtl"] .modal-cta:hover i {
+    transform: scaleX(-1) translateX(-4px); 
+}
+
+[dir="rtl"] .project-status {
+    left: auto;
+    right: 20px;
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .project-number {
+    right: auto;
+    left: 24px;
+}
+
+[dir="rtl"] .project-modal-close {
+    right: auto;
+    left: 16px;
+}
+
+[dir="rtl"] .background span:nth-child(2) {
+    right: auto;
+    left: -80px;
+}
+
+[dir="rtl"] .project-highlights li {
+    grid-template-columns: 1fr 40px;
+    text-align: right;
+}
+
+[dir="rtl"] .project-highlights li > i {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+[dir="rtl"] .project-highlights li > span {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+@media(max-width:992px) {
+    [dir="rtl"] nav ul {
+        right: auto;
+        left: -100%;
+        border-radius: 0 20px 20px 0;
+    }
+    [dir="rtl"] nav ul.active {
+        left: 0;
     }
 }
