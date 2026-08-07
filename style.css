@@ -1423,9 +1423,11 @@ body.light {
     }
 }
 
+
 /* ==========================================
    RTL (KURDISH) SUPPORT
 ========================================== */
+
 [dir="rtl"] {
     text-align: right;
 }
@@ -1434,7 +1436,7 @@ body.light {
     flex-direction: row-reverse;
 }
 
-[dir="rtl"] .hero-left, 
+[dir="rtl"] .hero-left,
 [dir="rtl"] .about-content {
     text-align: right;
 }
@@ -1456,7 +1458,7 @@ body.light {
 [dir="rtl"] .project-btn:hover i,
 [dir="rtl"] .project-contact-link:hover i,
 [dir="rtl"] .modal-cta:hover i {
-    transform: scaleX(-1) translateX(-4px); 
+    transform: scaleX(-1) translateX(-4px);
 }
 
 [dir="rtl"] .project-status {
@@ -1485,23 +1487,32 @@ body.light {
     text-align: right;
 }
 
-[dir="rtl"] .project-highlights li > i {
+[dir="rtl"] .project-highlights li>i {
     grid-column: 2;
     grid-row: 1;
 }
 
-[dir="rtl"] .project-highlights li > span {
+[dir="rtl"] .project-highlights li>span {
     grid-column: 1;
     grid-row: 1;
 }
 
 @media(max-width:992px) {
     [dir="rtl"] nav ul {
+        flex-direction: column;
         right: auto;
         left: -100%;
         border-radius: 0 20px 20px 0;
     }
     [dir="rtl"] nav ul.active {
         left: 0;
+    }
+}
+
+@media(max-width:992px) {
+    body.light nav ul {
+        background: var(--surface);
+        /* باکگراوند دەگۆڕێت بۆ ڕەنگی ڕووناک */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     }
 }
